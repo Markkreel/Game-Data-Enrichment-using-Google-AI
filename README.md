@@ -83,4 +83,4 @@ Wuthering Waves,url3
 
 ## Output File Format
 
-The output `enhanced_game_data.csv` will contain the original columns plus the new `genre`, `short_description`, and `player_mode` columns.
+The output `enhanced_game_data.csv` will contain the original columns plus the new `genre`, `short_description`, and `player_mode` columns. See [`enhanced_game_data.csv`](https://github.com/Markkreel/Game-Data-Enrichment-using-Google-AI/blob/main/enhanced_game_data.csv).
