@@ -21,13 +21,7 @@ This Python script uses the Google Generative AI API (Gemini) to enrich video ga
 ## Installation
 
 1. **Clone the repository or download the files.**
-
-2. **Navigate to the project directory:**
-
-   ```bash
-   cd path/to/Task-2
-   ```
-
+2. **Navigate to the project directory**
 3. **(Optional but recommended) Create and activate a virtual environment:**
 
    ```bash
@@ -58,7 +52,6 @@ This Python script uses the Google Generative AI API (Gemini) to enrich video ga
 ## Running the Script
 
 1. **Ensure the input file `Game_Thumbnail.csv` is present** in the project directory. It should contain at least a column named `game_title`.
-
 2. **Run the Python script:**
 
    ```bash
