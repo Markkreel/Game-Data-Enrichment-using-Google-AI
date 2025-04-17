@@ -80,8 +80,8 @@ for index, row in df.iterrows():
     # --- A. Genre Classification ---
     prompt_genre = (
         f"What is the primary single-word genre for the video game '{game_title}'? "
-        "Examples: Fighting, Shooter, RPG, Simulation, Strategy, Action, Adventure, Puzzle, Sports, Racing. "
-        "Respond with only the single-word genre."
+        f"Examples: Fighting, Shooter, RPG, Simulation, Strategy, Action, Adventure, Puzzle, Sports, Racing. "
+        f"Respond with only the single-word genre."
     )
     try:
         response_genre = model.generate_content(
@@ -133,7 +133,7 @@ for index, row in df.iterrows():
     # --- C. Player Mode Determination ---
     prompt_player_mode = (
         f"Does the video game '{game_title}' support single-player only, multiplayer only, or both? "
-        "Respond with *only one* of these exact words: 'Singleplayer', 'Multiplayer', or 'Both'."
+        f"Respond with *only one* of these exact words: 'Singleplayer', 'Multiplayer', or 'Both'."
     )
     try:
         response_player_mode = model.generate_content(prompt_player_mode)
