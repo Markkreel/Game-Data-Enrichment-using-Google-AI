@@ -1,3 +1,9 @@
+"""
+This module interacts with the Google AI API to enrich video game data.
+It processes game titles to generate genres, descriptions, and player modes,
+then saves the enhanced data to a CSV file.
+"""
+
 import os
 import time  # Import the time library for delays
 import pandas as pd
