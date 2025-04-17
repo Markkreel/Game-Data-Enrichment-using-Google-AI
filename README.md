@@ -20,50 +20,53 @@ This Python script uses the Google Generative AI API (Gemini) to enrich video ga
 
 ## Installation
 
-1.  **Clone the repository or download the files.**
+1. **Clone the repository or download the files.**
 
-2.  **Navigate to the project directory:**
+2. **Navigate to the project directory:**
 
-    ```bash
-    cd path/to/Task-2
-    ```
+   ```bash
+   cd path/to/Task-2
+   ```
 
-3.  **(Optional but recommended) Create and activate a virtual environment:**
+3. **(Optional but recommended) Create and activate a virtual environment:**
 
-    ```bash
-    python -m venv venv
-    # On Windows
-    .\venv\Scripts\activate
-    # On macOS/Linux
-    source venv/bin/activate
-    ```
+   ```bash
+   python -m venv venv
+   # On Windows
+   .\venv\Scripts\activate
+   # On macOS/Linux
+   source venv/bin/activate
+   ```
 
-4.  **Install the required Python libraries:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+4. **Install the required Python libraries:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Configuration
 
-1.  **Create a `.env` file** in the root of the project directory.
-2.  **Add your Google API Key** to the `.env` file:
-    ```
-    GOOGLE_API_KEY=YOUR_API_KEY_HERE
-    ```
-    Replace `YOUR_API_KEY_HERE` with your actual Google API key.
+1. **Create a `.env` file** in the root of the project directory.
+2. **Add your Google API Key** to the `.env` file:
+
+   ```bash
+   GOOGLE_API_KEY=YOUR_API_KEY_HERE
+   ```
+
+   Replace `YOUR_API_KEY_HERE` with your actual Google API key.
 
 ## Running the Script
 
-1.  **Ensure the input file `Game_Thumbnail.csv` is present** in the project directory. It should contain at least a column named `game_title`.
+1. **Ensure the input file `Game_Thumbnail.csv` is present** in the project directory. It should contain at least a column named `game_title`.
 
-2.  **Run the Python script:**
+2. **Run the Python script:**
 
-    ```bash
-    python main.py
-    ```
+   ```bash
+   python main.py
+   ```
 
-3.  The script will print progress updates to the console.
-4.  Upon completion, a new file named `enhanced_game_data.csv` will be created in the same directory, containing the original data along with the newly generated columns.
+3. The script will print progress updates to the console.
+4. Upon completion, a new file named `enhanced_game_data.csv` will be created in the same directory, containing the original data along with the newly generated columns.
 
 ## Input File Format
 
