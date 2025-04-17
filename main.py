@@ -42,13 +42,15 @@ except Exception as e:
 # --- Step 2: Load the CSV Data ---
 print("\n--- Step 2: Loading CSV Data ---")
 try:
-    csv_file = "Game_Thumbnail.csv"  # Make sure this file is in the same directory or provide the full path
-    df = pd.read_csv(csv_file)
-    print(f"Successfully loaded {csv_file}.")
+    INPUT_FILE = "Game_Thumbnail.csv"
+    df = pd.read_csv(INPUT_FILE)
+    print(f"Successfully loaded {INPUT_FILE}.")
     print("DataFrame Head:")
     print(df.head())
 except FileNotFoundError:
-    print(f"Error: {csv_file} not found. Please ensure it's in the correct directory.")
+    print(
+        f"Error: {INPUT_FILE} not found. Please ensure it's in the correct directory."
+    )
     exit()
 except Exception as e:
     print(f"Error loading CSV: {e}")
@@ -86,9 +88,9 @@ for index, row in df.iterrows():
             prompt_genre,
             # generation_config=generation_config # Optional config
         )
-        genre = response_genre.text.strip()
-        print(f"  Genre: {genre}")
-        GENRES.append(genre)
+        GENRE = response_genre.text.strip()
+        print(f"  Genre: {GENRE}")
+        GENRES.append(GENRE)
     except Exception as e:
         print(f"  Error getting genre for {game_title}: {e}")
         # Check if the error is due to blocked content (safety settings)
