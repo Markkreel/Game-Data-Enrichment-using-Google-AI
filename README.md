@@ -75,21 +75,12 @@ The input `Game_Thumbnail.csv` file must contain a column named `game_title`.
 Example `Game_Thumbnail.csv`:
 
 ```csv
-Game_ID,game_title,thumbnail_url
-1,Elden Ring,url1
-2,Stardew Valley,url2
-3,Grand Theft Auto V,url3
+game_title,thumbnail_url
+Street Fighter 6,url1
+Hunt: Showdown 1896,url2
+Wuthering Waves,url3
 ```
 
 ## Output File Format
 
 The output `enhanced_game_data.csv` will contain the original columns plus the new `genre`, `short_description`, and `player_mode` columns.
-
-Example `enhanced_game_data.csv`:
-
-```csv
-Game_ID,game_title,thumbnail_url,genre,short_description,player_mode
-1,Elden Ring,url1,Action RPG,Explore a vast, dark fantasy world filled with challenging foes and intricate lore. Master combat and magic.,Both
-2,Stardew Valley,url2,Simulation,Inherit a farm plot. Cultivate crops, raise animals, build relationships, and explore caves.,Both
-3,Grand Theft Auto V,url3,Action-Adventure,"Switch between three criminals pulling off heists in a sprawling satirical city. Engage in driving, shooting, and various activities.",Both
-```
