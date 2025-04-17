@@ -2,10 +2,16 @@
 This module interacts with the Google AI API to enrich video game data.
 It processes game titles to generate genres, descriptions, and player modes,
 then saves the enhanced data to a CSV file.
+
+Installation:
+    pip install pandas google-generativeai python-dotenv
+
+Usage:
+    python -u main.py
 """
 
 import os
-import time  # Import the time library for delays
+import time
 import pandas as pd
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -26,14 +32,10 @@ try:
     genai.configure(api_key=api_key)
     print("Successfully configured Google AI service.")
 
-    # Initialize the Generative Model (using a fast model suitable for this task)
     # Using 1.5 flash as it's fast and capable for these kinds of tasks
     model = genai.GenerativeModel("gemini-1.5-flash-latest")
     print(f"Using model: {model.model_name}")
 
-    # Optional: Simple test call to verify connection (can be commented out later)
-    # response = model.generate_content("Test: Respond with OK")
-    # print(f"API Test response: {response.text.strip()}")
 
 except Exception as e:
     print(f"Error configuring Google AI or initializing model: {e}")
@@ -64,12 +66,6 @@ print("\n--- Step 3: Enriching Data using Google AI API ---")
 GENRES = []
 SHORT_DESCRIPTIONS = []
 PLAYER_MODES = []
-
-# Define generation config for potentially more controlled output (optional)
-# generation_config = genai.types.GenerationConfig(
-#     # candidate_count=1, # We only need one best answer
-#     # temperature=0.1 # Lower temperature for more deterministic answers
-# )
 
 # Loop through each game title in the DataFrame
 total_games = len(df)
@@ -159,10 +155,6 @@ for index, row in df.iterrows():
 
 print("\n--- Finished processing all games ---")
 
-# Now you have the lists: genres, SHORT_DESCRIPTION, player_modes
-# The next steps (4 and 5) would be to add these lists as new columns
-# to the DataFrame 'df' and save it to a new CSV.
-
 # --- Step 4: Add New Data to DataFrame ---
 print("\n--- Step 4: Adding New Data to DataFrame ---")
 
@@ -192,8 +184,6 @@ else:
     print(f"  Descriptions found: {len(SHORT_DESCRIPTIONS)}")
     print(f"  Player modes found: {len(PLAYER_MODES)}")
     print("Cannot reliably add columns. Please check processing logs for errors.")
-    # Optionally, you might want to exit or handle this differently depending on requirements
-    # exit() # Uncomment to stop execution if there's a mismatch
 
 # --- Step 5: Save the Enhanced Data ---
 print("\n--- Step 5: Saving Enhanced Data ---")
