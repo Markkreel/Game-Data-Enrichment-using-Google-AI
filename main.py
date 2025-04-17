@@ -53,9 +53,9 @@ except Exception as e:
 print("\n--- Step 3: Enriching Data using Google AI API ---")
 
 # Lists to store the generated data
-genres = []
-SHORT_DESCRIPTION = []
-player_modes = []
+GENRES = []
+SHORT_DESCRIPTIONS = []
+PLAYER_MODES = []
 
 # Define generation config for potentially more controlled output (optional)
 # generation_config = genai.types.GenerationConfig(
@@ -82,7 +82,7 @@ for index, row in df.iterrows():
         )
         genre = response_genre.text.strip()
         print(f"  Genre: {genre}")
-        genres.append(genre)
+        GENRES.append(genre)
     except Exception as e:
         print(f"  Error getting genre for {game_title}: {e}")
         # Check if the error is due to blocked content (safety settings)
@@ -92,7 +92,7 @@ for index, row in df.iterrows():
             Exception
         ):  # Handle case where response object might not exist or have feedback
             pass
-        genres.append("Error")  # Placeholder for errors
+        GENRES.append("Error")  # Placeholder for errors
 
     time.sleep(3)  # Small delay to avoid hitting rate limits
 
@@ -111,14 +111,14 @@ for index, row in df.iterrows():
             print(f"  Description (truncated): {DESCRIPTION}")
         else:
             print(f"  Description: {DESCRIPTION}")
-        SHORT_DESCRIPTION.append(DESCRIPTION)
+        SHORT_DESCRIPTIONS.append(DESCRIPTION)
     except Exception as e:
         print(f"  Error getting description for {game_title}: {e}")
         try:
             print(f"  Safety feedback: {response_description.prompt_feedback}")
         except Exception:
             pass
-        SHORT_DESCRIPTION.append("Error")
+        SHORT_DESCRIPTIONS.append("Error")
 
     time.sleep(3)  # Small delay
 
@@ -129,22 +129,22 @@ for index, row in df.iterrows():
     )
     try:
         response_player_mode = model.generate_content(prompt_player_mode)
-        player_mode = response_player_mode.text.strip()
+        PLAYER_MODE = response_player_mode.text.strip()
         # Basic validation to ensure it's one of the expected outputs
-        if player_mode not in ["Singleplayer", "Multiplayer", "Both"]:
+        if PLAYER_MODE not in ["Singleplayer", "Multiplayer", "Both"]:
             print(
-                f"  Warning: Unexpected player mode response '{player_mode}'. Storing as received."
+                f"  Warning: Unexpected player mode response '{PLAYER_MODE}'. Storing as received."
             )
             # You could add logic here to retry or default if needed
-        print(f"  Player Mode: {player_mode}")
-        player_modes.append(player_mode)
+        print(f"  Player Mode: {PLAYER_MODE}")
+        PLAYER_MODES.append(PLAYER_MODE)
     except Exception as e:
         print(f"  Error getting player mode for {game_title}: {e}")
         try:
             print(f"  Safety feedback: {response_player_mode.prompt_feedback}")
         except Exception:
             pass
-        player_modes.append("Error")
+        PLAYER_MODES.append("Error")
 
     time.sleep(6)  # Small delay before processing the next game
 
@@ -160,14 +160,14 @@ print("\n--- Step 4: Adding New Data to DataFrame ---")
 
 # First, check if the number of results matches the number of rows in the DataFrame
 if (
-    len(genres) == len(df)
-    and len(SHORT_DESCRIPTION) == len(df)
-    and len(player_modes) == len(df)
+    len(GENRES) == len(df)
+    and len(SHORT_DESCRIPTIONS) == len(df)
+    and len(PLAYER_MODES) == len(df)
 ):
     # Add the lists as new columns to the DataFrame
-    df["genre"] = genres
-    df["short_description"] = SHORT_DESCRIPTION
-    df["player_mode"] = player_modes
+    df["genre"] = GENRES
+    df["short_description"] = SHORT_DESCRIPTIONS
+    df["PLAYER_MODE"] = PLAYER_MODES
 
     print(
         "Successfully added new columns: 'genre', 'short_description', 'player_mode'."
@@ -180,9 +180,9 @@ else:
         "Error: Mismatch between the number of results and the number of rows in the DataFrame."
     )
     print(f"  DataFrame rows: {len(df)}")
-    print(f"  Genres found: {len(genres)}")
-    print(f"  Descriptions found: {len(SHORT_DESCRIPTION)}")
-    print(f"  Player modes found: {len(player_modes)}")
+    print(f"  Genres found: {len(GENRES)}")
+    print(f"  Descriptions found: {len(SHORT_DESCRIPTIONS)}")
+    print(f"  Player modes found: {len(PLAYER_MODES)}")
     print("Cannot reliably add columns. Please check processing logs for errors.")
     # Optionally, you might want to exit or handle this differently depending on requirements
     # exit() # Uncomment to stop execution if there's a mismatch
@@ -191,20 +191,20 @@ else:
 print("\n--- Step 5: Saving Enhanced Data ---")
 
 # Define the output file name
-output_csv_file = "enhanced_game_data.csv"
+OUTPUT_FILE = "enhanced_game_data.csv"
 
 # Save the DataFrame (only if columns were added successfully)
 if (
     "genre" in df.columns
     and "short_description" in df.columns
-    and "player_mode" in df.columns
+    and "PLAYER_MODE" in df.columns
 ):
     try:
         # Save to CSV, without writing the Pandas index column
         df.to_csv(
-            output_csv_file, index=False, encoding="utf-8"
+            OUTPUT_FILE, index=False, encoding="utf-8"
         )  # Added encoding='utf-8' for broader compatibility
-        print(f"Enhanced data successfully saved to '{output_csv_file}'")
+        print(f"Enhanced data successfully saved to '{OUTPUT_FILE}'")
     except Exception as e:
         print(f"Error saving DataFrame to CSV: {e}")
 else:
