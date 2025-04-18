@@ -109,6 +109,14 @@ for index, row in df.iterrows():
     try:
         response_description = model.generate_content(prompt_description)
         DESCRIPTION = response_description.text.strip()
+
+        prefix_to_remove = "Description: "
+        # Check if the description starts with the prefix (case-insensitive)
+        if DESCRIPTION.lower().startswith(prefix_to_remove.lower()):
+            # If it does, remove the prefix and any leading whitespace left over
+            DESCRIPTION = DESCRIPTION[len(prefix_to_remove) :].strip()
+            # print(f"  (Prefix removed)") # Optional: uncomment for debugging
+
         # Optional: Add a check/truncation if the model ignores the length limit
         if len(DESCRIPTION.split()) > 35:  # Allow a little leeway
             DESCRIPTION = " ".join(DESCRIPTION.split()[:30]) + "..."
@@ -167,7 +175,7 @@ if (
     # Add the lists as new columns to the DataFrame
     df["genre"] = GENRES
     df["short_description"] = SHORT_DESCRIPTIONS
-    df["PLAYER_MODE"] = PLAYER_MODES
+    df["player_mode"] = PLAYER_MODES
 
     print(
         "Successfully added new columns: 'genre', 'short_description', 'player_mode'."
@@ -195,7 +203,7 @@ OUTPUT_FILE = "enhanced_game_data.csv"
 if (
     "genre" in df.columns
     and "short_description" in df.columns
-    and "PLAYER_MODE" in df.columns
+    and "player_mode" in df.columns
 ):
     try:
         # Save to CSV, without writing the Pandas index column
