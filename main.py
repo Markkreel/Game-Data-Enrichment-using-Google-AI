@@ -115,7 +115,10 @@ for index, row in df.iterrows():
         if DESCRIPTION.lower().startswith(prefix_to_remove.lower()):
             # If it does, remove the prefix and any leading whitespace left over
             DESCRIPTION = DESCRIPTION[len(prefix_to_remove) :].strip()
-            # print(f"  (Prefix removed)") # Optional: uncomment for debugging
+
+        if DESCRIPTION.startswith(prefix_to_remove):
+            # If it does, remove the prefix and any leading whitespace left over
+            DESCRIPTION = DESCRIPTION[len(prefix_to_remove) :].strip()
 
         # Optional: Add a check/truncation if the model ignores the length limit
         if len(DESCRIPTION.split()) > 35:  # Allow a little leeway
