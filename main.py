@@ -33,7 +33,7 @@ try:
     print("Successfully configured Google AI service.")
 
     # Using 1.5 flash as it's fast and capable for these kinds of tasks
-    model = genai.GenerativeModel("gemini-1.5-flash-latest")
+    model = genai.GenerativeModel("gemini-2.0-flash-lite")
     print(f"Using model: {model.model_name}")
 
 
